@@ -215,7 +215,7 @@ namespace TexasHoldEm.Client
             // create move request
             var move = new TexasHoldEmMove();
 
-
+            ChanceOfWinning(hole1, hole2, new List<Card>(boardCards).ToList());
 
             // Bet the minimum and one in three times raise by 0, 10, 20, 30 or 40
             //move.BetSize = minBet + (_random.Next(3) == 0 ? 10 : 0) * _random.Next(5);
@@ -251,13 +251,48 @@ namespace TexasHoldEm.Client
             ClientMoved(move);
         }
 
-        private float ChanceOfWinning()
+        private float ChanceOfWinning(Card hole1, Card hole2, List<Card> boardCards)
         {
-            //List<
-            Card c = new Card();
+            List<Card> cardsInDeck = new List<Card>();
+            //populate all cards
+
+            //populate suits
+            for(int i = 1; i <= 4; i++)
+            {
+                //populate indexes
+                for(int j = 2; j <= 14; j++)
+                {
+                    Card temp = new Card();
+                    temp.Index = (CardIndexType)j;
+                    temp.Suit = (CardSuitType)i;
+                    cardsInDeck.Add(temp);
+                }
+            }
+
+            boardCards.Add(hole1);
+            boardCards.Add(hole2);
+
+            cardsInDeck.RemoveAll(x => { return x.Suit == hole1.Suit && x.Index == hole1.Index;});
+            cardsInDeck.RemoveAll(x => { return x.Suit == hole2.Suit && x.Index == hole2.Index; });
+            foreach(Card c in boardCards) cardsInDeck.RemoveAll(x => { return x.Suit == c.Suit && x.Index == c.Index; });
+
             
+
+            //int currentHandRank = hole1.HandRank(boardCards.ToArray());
+
+            foreach (Card c in cardsInDeck) ;
             return 0.0f;
         }
+
+        //public List<float> possibilityOfRank(List<Card> knownCards, List<Card> unknownCards, int roundsLeft)
+        //{
+            
+        //    for(int i = 0; i < unknownCards.Count; i++)
+        //    {
+                
+        //    }
+        //    return 0.0f;
+        //}
 
         #region Helper Methods
         private int RangeRand(int min, int max)
