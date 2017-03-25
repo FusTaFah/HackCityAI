@@ -215,13 +215,48 @@ namespace TexasHoldEm.Client
             // create move request
             var move = new TexasHoldEmMove();
 
-            // Bet the minimum and one in three times raise by 0, 10, 20, 30 or 40
-            move.BetSize = minBet + (_random.Next(3) == 0 ? 10 : 0) * _random.Next(5);
 
-            
+
+            // Bet the minimum and one in three times raise by 0, 10, 20, 30 or 40
+            //move.BetSize = minBet + (_random.Next(3) == 0 ? 10 : 0) * _random.Next(5);
+            //move.BetSize = minBet;
+            //if (isOurFirstBetOfRound)
+            //{
+            //    move.BetSize = 0;
+            //}else
+            //{
+            //    List<Card> cards = state.BoardCards; //.Concat(playerHand);
+            //    foreach (Card c in playerHand) cards.Add(c);
+            //    List<bool> confidenceQualifiers = new List<bool>();
+            //    if (isPair) confidenceQualifiers.Add(isPair);
+            //    if (isTwoPair) confidenceQualifiers.Add(isTwoPair);
+            //    if (isThreeOfAKind) confidenceQualifiers.Add(isThreeOfAKind);
+            //    if (isStraight) confidenceQualifiers.Add(isStraight);
+            //    if (isFlush) confidenceQualifiers.Add(isFlush);
+            //    if (isFullHouse) confidenceQualifiers.Add(isFullHouse);
+            //    if (isFourOfAKind) confidenceQualifiers.Add(isFourOfAKind);
+            //    if (isFourCardFlush) confidenceQualifiers.Add(isFourCardFlush);
+            //    if (isFourCardStraight) confidenceQualifiers.Add(isFourCardStraight);
+            //    if(confidenceQualifiers.Count < 3)
+            //    {
+            //        move.Fold = true;
+            //    }
+            //    //FUCK OFF INTELLISENSE
+            //    int confidence = (int)((float)confidenceQualifiers.Count * ((float)playerStack / 1000.0f));
+
+            //    move.BetSize = minBet + confidence /*+ _random.Next(confidence / 2)*/;
+            //}
 
             // call server to process our move
             ClientMoved(move);
+        }
+
+        private float ChanceOfWinning()
+        {
+            //List<
+            Card c = new Card();
+            
+            return 0.0f;
         }
 
         #region Helper Methods
